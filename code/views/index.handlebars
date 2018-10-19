@@ -1,17 +1,31 @@
-<link rel="stylesheet" type="text/css" href="../public/css/reset.css" />
-<link rel="stylesheet" type="text/css" href="../public/css/style.css" />
-
 <div id="wrapper">
-      <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no problem.</i></h2>
-      <div id="articles"></div>
-      <div id="notes"></div>
+    <h1>Note Scraper</h1>
+    <h2><i>If you can do this...the homework should be no problem.</i></h2>
+    <div id="articles">
+        {{#each items}}
+        <p>{{title}}<br>
+            <a target="_blank" href="https://old.reddit.com{{link}}">View Comments</a> {{amount}}<br>
+            <button class="addNote myBtn" data-id="{{_id}}">Add Note</button>
+             </p>
+            
+
+        {{/each}}
+    </div>
+    <div id="notes"></div>
+</div>
+
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Add a Note</p>
+        <input id="notetext" type="text">
+        <br>
+        <button id="submit">Submit</button>
     </div>
 
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../public/app.js"></script>
-
-    
+</div>
