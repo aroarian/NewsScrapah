@@ -22,7 +22,7 @@ $("#submit").on("click", function(){
 
     let body = {buttonId: buttonId, text:text}
     $.post("/add-note", body, function(response){
-        console.log(response);
+        console.log("response" + response);
         
     })
 })
