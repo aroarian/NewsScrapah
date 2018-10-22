@@ -1,15 +1,19 @@
+<nav class="nav">
+         <button id="clear" onclick="window.location.href='/clear'">Re-Scrape</button>
+         <button id="scrape" onclick="window.location.href='/scrapah'">Scrape</button>
+</nav>
 <div id="wrapper">
-    <button id="scrape" onclick="window.location.href='/scrapah'">Scrape</button>
-    <button id="clear" onclick="window.location.href='/clear'">Re-Scrape</button>
-    <h1>Note Scraper</h1>
-    <h2><i>If you can do this...the homework should be no problem.</i></h2>
+    <h1>Wow Reddit Scraper</h1>
+
     <div id="articles">
         {{#each items}}
-        <p>{{title}}<br>
+       
+        <div class="artticle">{{title}}<br>
             <a target="_blank" href="https://old.reddit.com{{link}}">View Article</a> {{amount}}<br>
-            <button class="addNote myBtn" data-id="{{_id}}">Add Note</button><button class="viewNote" data-id="{{_id}}">View Notes</button>
-             </p>
-            
+            <button class="addNote myBtn" data-id="{{_id}}">Add Note</button><button class="viewNote" data-id="{{_id}}">View
+                Notes</button>
+        </div>
+
 
         {{/each}}
     </div>
@@ -22,9 +26,22 @@
         <p>Add a Note</p>
         <input id="notetitle" type="text">
         <br>
-        <input id="notetext" type="text">
+        <textarea id="notetext" type="text"></textarea>
         <br>
         <button id="submit" data-id="{{_id}}">Submit</button>
+    </div>
+
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span id="editspan" class="close">&times;</span>
+        <p>Edit Note</p>
+        <input id="edittitle" type="text">
+        <br>
+        <textarea id="edittext" type="text"></textarea>
+        <br>
+        <button id="save">Save</button>
     </div>
 
 </div>

@@ -98,12 +98,35 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-app.post("/notes/:id", function(req, res) {
+app.get("/notes/:id", function(req, res){
+  db.Note.findOne({_id: req.params.id})
+  .then(function(dbNote){
+    console.log(dbNote)
+    res.json(dbNote);
+  });
+})
 
+app.post("/notes/:id", function(req, res) {
   db.Note.create(req.body)
   .then(function(dbNote) {return db.Article.findOneAndUpdate({ _id: req.params.id },{ $push:{ note: dbNote._id }},{ new: true });
   })
 });
+
+app.post("/update/:id", function(req, res){
+  db.Note.findByIdAndUpdate(req.params.id, { $set: {title: req.body.title, text: req.body.text}}, { new: true }, function (err, note) {
+    if (err) return handleError(err);
+    res.send(note)
+  });
+});
+
+app.post("/remove/:id", function(req, res){
+  db.Note.deleteOne({_id: req.params.id}, function(){
+    
+  }).then(function(){
+    console.log("delete working");
+  })
+});
+
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
 });
