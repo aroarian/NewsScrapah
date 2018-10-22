@@ -4,7 +4,7 @@ const express = require("express");
 const request = require("request");
 const exphbs = require("express-handlebars");
 const Article = require("./models/articles.js");
-const Note = require("./models/notes.js")
+const Note = require("./models/notes.js");
 
 const db = require("./models");
 
@@ -31,7 +31,6 @@ app.get("/scrapah", function(req, res) {
     }
 
     const $ = cheerio.load(html);
-
     const results = [];
 
     $("div.top-matter").each(function(i, element) {
@@ -61,22 +60,17 @@ app.get("/scrapah", function(req, res) {
         comments: comments
       });
       article.save();
+      
     });
 
-    console.log(results);
-    res.send("scrape complete");
-  });
-});
-
-app.get("/all", function(req, res) {
-  db.Article.find({}).then(function(data) {
-    res.send(data);
+    res.redirect("/");
+    
   });
 });
 
 app.get("/clear", function(req, res) {
   db.Article.remove({}).then(function() {
-    res.send("clear worked");
+    res.redirect("/scrapah");
   });
 });
 
@@ -86,40 +80,29 @@ app.get("/", function(req, res) {
   });
 });
 
-// app.get("/add-note", function(req, res) {
-//   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-//   db.Article.findOne({ _id: req.params.id })
-//     // ..and populate all of the notes associated with it
-//     .populate("note")
-//     .then(function(dbArticle) {
-//       // If we were able to successfully find an Article with the given id, send it back to the client
-//       res.json(dbArticle);
-//     })
-//     .catch(function(err) {
-//       // If an error occurred, send it to the client
-//       res.json(err);
-//     });
-// });
-app.post("/add-note", function(req, res) {
-  console.log(req.body);
-  res.send("route is working");
-  
-  db.Note.create(req.body)
-    .then(function(dbNote) {
+app.get("/articles/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  console.log("param " + req.params.id);
+  db.Article.findOne({ _id: req.params.id })
+    .populate("note")
+    // ..and populate all of the notes associated with it
 
-      console.log("dbNote" + dbNote);
-       db.Article.findOneAndUpdate(
-        { _id: dbNote.buttonId },
-        { note: dbNote._id },
-        { new: true }
-      );
-    })
     .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
+      console.log(".then working");
     })
     .catch(function(err) {
+      // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+app.post("/notes/:id", function(req, res) {
+
+  db.Note.create(req.body)
+  .then(function(dbNote) {return db.Article.findOneAndUpdate({ _id: req.params.id },{ $push:{ note: dbNote._id }},{ new: true });
+  })
 });
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");

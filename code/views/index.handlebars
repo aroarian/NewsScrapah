@@ -1,11 +1,13 @@
 <div id="wrapper">
+    <button id="scrape" onclick="window.location.href='/scrapah'">Scrape</button>
+    <button id="clear" onclick="window.location.href='/clear'">Re-Scrape</button>
     <h1>Note Scraper</h1>
     <h2><i>If you can do this...the homework should be no problem.</i></h2>
     <div id="articles">
         {{#each items}}
         <p>{{title}}<br>
-            <a target="_blank" href="https://old.reddit.com{{link}}">View Comments</a> {{amount}}<br>
-            <button class="addNote myBtn" data-id="{{_id}}">Add Note</button>
+            <a target="_blank" href="https://old.reddit.com{{link}}">View Article</a> {{amount}}<br>
+            <button class="addNote myBtn" data-id="{{_id}}">Add Note</button><button class="viewNote" data-id="{{_id}}">View Notes</button>
              </p>
             
 
@@ -14,18 +16,15 @@
     <div id="notes"></div>
 </div>
 
-<button id="myBtn">Open Modal</button>
-
-<!-- The Modal -->
 <div id="myModal" class="modal">
-
-    <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
         <p>Add a Note</p>
+        <input id="notetitle" type="text">
+        <br>
         <input id="notetext" type="text">
         <br>
-        <button id="submit">Submit</button>
+        <button id="submit" data-id="{{_id}}">Submit</button>
     </div>
 
 </div>
