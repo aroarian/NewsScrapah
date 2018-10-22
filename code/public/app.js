@@ -3,8 +3,7 @@ $(document).ready(function() {
   const btn = $(".myBtn");
   const span = $(".close")[0];
   const editModal = $("#editModal");
-  const editSpan = $("#editspan");
-
+  
   let articleId;
 
   //MODAL JS ==================================
@@ -86,7 +85,7 @@ $(document).ready(function() {
     let noteId = $("#edittitle").attr("data-id");
     let body = { noteId: noteId, text: text, title: title };
     $.post(`/update/${noteId}`, body, function(response) {
-      console.log(response);
+      
     }).then(function() {
       setTimeout(function() {
         $("#edittext").val("");

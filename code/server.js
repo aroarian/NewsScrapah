@@ -60,11 +60,9 @@ app.get("/scrapah", function(req, res) {
         comments: comments
       });
       article.save();
-      
     });
 
     res.redirect("/");
-    
   });
 });
 
@@ -82,7 +80,6 @@ app.get("/", function(req, res) {
 
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  console.log("param " + req.params.id);
   db.Article.findOne({ _id: req.params.id })
     .populate("note")
     // ..and populate all of the notes associated with it
@@ -90,7 +87,6 @@ app.get("/articles/:id", function(req, res) {
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
-      console.log(".then working");
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -98,33 +94,36 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-app.get("/notes/:id", function(req, res){
-  db.Note.findOne({_id: req.params.id})
-  .then(function(dbNote){
-    console.log(dbNote)
+app.get("/notes/:id", function(req, res) {
+  db.Note.findOne({ _id: req.params.id }).then(function(dbNote) {
     res.json(dbNote);
   });
-})
-
-app.post("/notes/:id", function(req, res) {
-  db.Note.create(req.body)
-  .then(function(dbNote) {return db.Article.findOneAndUpdate({ _id: req.params.id },{ $push:{ note: dbNote._id }},{ new: true });
-  })
 });
 
-app.post("/update/:id", function(req, res){
-  db.Note.findByIdAndUpdate(req.params.id, { $set: {title: req.body.title, text: req.body.text}}, { new: true }, function (err, note) {
-    if (err) return handleError(err);
-    res.send(note)
+app.post("/notes/:id", function(req, res) {
+  db.Note.create(req.body).then(function(dbNote) {
+    return db.Article.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { note: dbNote._id } },
+      { new: true }
+    );
   });
 });
 
-app.post("/remove/:id", function(req, res){
-  db.Note.deleteOne({_id: req.params.id}, function(){
-    
-  }).then(function(){
-    console.log("delete working");
-  })
+app.post("/update/:id", function(req, res) {
+  db.Note.findByIdAndUpdate(
+    req.params.id,
+    { $set: { title: req.body.title, text: req.body.text } },
+    { new: true },
+    function(err, note) {
+      if (err) return handleError(err);
+      res.send(note);
+    }
+  );
+});
+
+app.post("/remove/:id", function(req, res) {
+  db.Note.deleteOne({ _id: req.params.id }, function() {}).then(function() {});
 });
 
 app.listen(PORT, function() {
