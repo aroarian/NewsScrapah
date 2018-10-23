@@ -1,22 +1,86 @@
+body {
+  background-image: linear-gradient(rgb(68, 68, 68), rgb(60, 60, 60));
+}
 #wrapper {
-  width: 85%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 50px;
+  margin-bottom: 50px;
 }
 #articles {
   display: inline-block;
   width: 60%;
   height: auto;
+  box-shadow: 20px 0 20px -10px rgb(43, 43, 43);
 }
+
+.article {
+  padding: 15px;
+  border: 1px solid rgb(185, 124, 2);
+  background-image: linear-gradient(rgb(70, 47, 1), rgb(87, 58, 1));
+  position: relative;
+}
+.article p {
+  max-width: 80%;
+  color: rgb(241, 184, 70);
+  font-weight: bold;
+}
+
+.article img {
+  width: 40px;
+  float: right;
+  filter: invert(60%);
+}
+
+.artNotes {
+  height: auto;
+  max-width: 100%;
+  position: relative;
+}
+
+.artNotes span{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 8px;
+  font-size: 20px;
+}
+
+.artNotes h2{
+  color: rgb(241, 184, 70);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.artNotes p{
+  color: white;
+  font-weight: bold;
+}
+
+.arrow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  line-height: 38px;
+}
+
+.arrow p {
+  float: left;
+  visibility: hidden;
+}
+
+.arrow:hover p {
+  visibility: visible;
+}
+
 #notes {
   float: right;
-  width: 30%;
+  width: 40%;
 }
-textarea, input {
+textarea,
+input {
   display: block;
   width: 100%;
-  background-color: #FCF5C7;
 }
 input {
   height: 36px;
@@ -27,26 +91,46 @@ textarea {
   font-size: 18px;
 }
 
-nav button{
+nav button {
   float: right;
+}
+
+nav h1{
+  color: rgb(241, 184, 70);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 150%;
+}
+
+.btn {
   margin-right: 10px;
   margin-top: 15px;
-  border:0;
+  border: 0;
   padding: 13px;
   background-color: black;
   color: white;
 }
 
-#clear{
+nav h1 {
+  float: left;
+  margin-left: 40px;
+}
+
+#clear {
   margin-right: 20px;
 }
 
-nav{
-  height: 75px;
-  border-bottom: 1px solid black;
+.remove{
+  background-color: none;
 }
 
-
+nav {
+  height: 75px;
+  line-height: 75px;
+  background-image: linear-gradient(rgb(82, 82, 82), rgb(77, 77, 77));
+  border-bottom: 5px solid rgb(59, 59, 59);
+  margin-bottom: 15px;
+}
 
 .modal {
   display: none; /* Hidden by default */
@@ -55,19 +139,33 @@ nav{
   left: 0;
   top: 0;
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: 100; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-image: linear-gradient(rgb(82, 82, 82), rgb(77, 77, 77));
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border: 5px solid rgb(59, 59, 59);
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content input,
+.modal-content textarea {
+  border: 0;
+  background-color: rgb(70, 70, 70);
+  border-bottom: 2px solid rgb(185, 124, 2);
+  max-width: 99%;
+  padding: 5px;
+}
+
+input,
+textarea:focus {
+  outline: none;
 }
 
 /* The Close Button */

@@ -51,13 +51,13 @@ $(document).ready(function() {
     $.get(`/articles/${articleId}`, function(response) {}).then(function(data) {
       for (let i = 0; i < data.note.length; i++) {
         $("#notes").append(
-          `<div class="artNotes" id="${data.note[i]._id}"><h2>${
+          `<div class="artNotes article" id="${data.note[i]._id}"><h2>${
             data.note[i].title
-          }</h2><p>${data.note[i].text}</p><button class="edit" data-id="${
+          }</h2><p>${data.note[i].text}</p><button class="btn edit" data-id="${
             data.note[i]._id
-          }">Edit</button><button class="remove" data-id="${
+          }">Edit</button><span class="close remove" data-id="${
             data.note[i]._id
-          }">X</button></div>`
+          }">X</span></div>`
         );
       }
 

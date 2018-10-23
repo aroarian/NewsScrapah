@@ -1,17 +1,17 @@
 <nav class="nav">
-         <button id="clear" onclick="window.location.href='/clear'">Re-Scrape</button>
-         <button id="scrape" onclick="window.location.href='/scrapah'">Scrape</button>
+    <h1>Wow Reddit Scraper</h1>
+         <button class="btn" id="clear" onclick="window.location.href='/clear'">Re-Scrape</button>
+         <button class="btn" id="scrape" onclick="window.location.href='/scrapah'">Scrape</button>
 </nav>
 <div id="wrapper">
-    <h1>Wow Reddit Scraper</h1>
+    
 
     <div id="articles">
         {{#each items}}
        
-        <div class="artticle">{{title}}<br>
-            <a target="_blank" href="https://old.reddit.com{{link}}">View Article</a> {{amount}}<br>
-            <button class="addNote myBtn" data-id="{{_id}}">Add Note</button><button class="viewNote" data-id="{{_id}}">View
-                Notes</button>
+        <div class="article"><p>{{title}}</p>
+            <a target="_blank" href="https://old.reddit.com{{link}}">View Article</a>
+            <button class=" btn addNote myBtn" data-id="{{_id}}">Add Note</button><div class="arrow"><p>View Notes</p><img src="./images/arrow.png" class="viewNote" data-id="{{_id}}"></div>
         </div>
 
 
@@ -28,7 +28,7 @@
         <br>
         <textarea id="notetext" type="text"></textarea>
         <br>
-        <button id="submit" data-id="{{_id}}">Submit</button>
+        <button class="btn" id="submit" data-id="{{_id}}">Submit</button>
     </div>
 
 </div>
