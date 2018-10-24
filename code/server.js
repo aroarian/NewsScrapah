@@ -8,7 +8,7 @@ const Article = require("./models/articles.js");
 
 const db = require("./models");
 
-let PORT = 3000;
+let PORT = process.env.PORT || 3000
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,8 +19,7 @@ app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
 
-mongoose.connect(
-  "mongodb://root:root@192.168.99.100:27017/scrapah?authSource=admin",
+mongoose.connect(process.env.MONGODB_URI || "mongodb://root:root@192.168.99.100:27017/scrapah?authSource=admin",
   { useNewUrlParser: true }
 );
 
