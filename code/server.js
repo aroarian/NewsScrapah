@@ -8,6 +8,8 @@ const Article = require("./models/articles.js");
 
 const db = require("./models");
 
+
+
 let PORT = process.env.PORT || 3000
 const app = express();
 
@@ -19,9 +21,9 @@ app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://root:root@192.168.99.100:27017/scrapah?authSource=admin",
-  { useNewUrlParser: true }
-);
+let  MONGODB_URI = process.env.MONGODB_URI || "mongodb://root:root@192.168.99.100:27017/scrapah?authSource=admin";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 app.get("/scrapah", function(req, res) {
   request("https://old.reddit.com/r/wow/", (error, response, html) => {
