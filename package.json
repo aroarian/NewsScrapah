@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "begin": "docker-compose -f mongo.yml up -d",
-    "stop": "docker-compose -f mongo.yml down"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
