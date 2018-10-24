@@ -8,8 +8,6 @@ const Article = require("./models/articles.js");
 
 const db = require("./models");
 
-
-
 let PORT = process.env.PORT || 3000
 const app = express();
 
